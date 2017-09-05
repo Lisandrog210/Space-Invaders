@@ -1,6 +1,5 @@
 package entities;
 
-
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.system.FlxAssets.FlxGraphicAsset;
@@ -8,7 +7,6 @@ import flixel.system.FlxAssets.FlxGraphicAsset;
 class Player extends FlxSprite
 {
 
-	
 	public function new(?x:Float=80, ?y:Float=140, ?SimpleGraphic:FlxGraphicAsset)
 	{
 		super(x, y, SimpleGraphic);
@@ -23,25 +21,31 @@ class Player extends FlxSprite
 		move();
 		shoot();
 		checkBoundaries();
+
 	}
-	
-	public function checkBoundaries() 
+
+	public function checkBoundaries()
 	{
-		if (x<0) 
+		if (x<0)
 			x = 0;
 		if (x > 144)
 			x = 144;
 	}
-	
-	public function shoot() 
+
+	public function shoot()
 	{
+
 		if (FlxG.keys.justPressed.SPACE)
 		{
+			bullet.isOnScreen(?Camera:FlxCamera):Bool
 			var bullet:PlayerBullets = new PlayerBullets(x, y, AssetPaths.bullet1__png);
+
 			bullet.x = x - 2 + width / 2;
-			bullet.y = y + height / 2;
+			bullet.y = y + height / 2;			
 			FlxG.state.add(bullet);
+
 		}
+
 	}
 
 	public function move()
@@ -52,7 +56,5 @@ class Player extends FlxSprite
 			x -= 2 * 60 * FlxG.elapsed;
 
 	}
-	
-	
 
 }

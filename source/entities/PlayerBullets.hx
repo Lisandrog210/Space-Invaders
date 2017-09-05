@@ -11,7 +11,7 @@ import flixel.system.FlxAssets.FlxGraphicAsset;
 class PlayerBullets extends FlxSprite
 {
 
-	static public var shotVel:Float = 300; 
+	static public var shotVel:Float = 300;
 	
 	public function new(?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset)
 	{
@@ -28,6 +28,7 @@ class PlayerBullets extends FlxSprite
 
 		if (y > FlxG.height)
 			destroy();
+			
 	}
 
 	override public function destroy():Void
@@ -35,6 +36,7 @@ class PlayerBullets extends FlxSprite
 	{
 		FlxG.state.remove(this);
 		super.destroy();
+		
 	}
 	
 	
