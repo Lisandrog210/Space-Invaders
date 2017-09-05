@@ -12,9 +12,7 @@ class Player extends FlxSprite
 	public function new(?x:Float=80, ?y:Float=140, ?SimpleGraphic:FlxGraphicAsset)
 	{
 		super(x, y, SimpleGraphic);
-
-		loadGraphic(AssetPaths.canon__png);
-		scale.set(3, 3);
+		scale.set(1, 1);
 
 	}
 
@@ -39,16 +37,14 @@ class Player extends FlxSprite
 	{
 		if (FlxG.keys.justPressed.SPACE)
 		{
-			var bullet:PlayerBullets = new PlayerBullets();
-			bullet.x = x + 4;
-			bullet.y = y - 2;
+			var bullet:PlayerBullets = new PlayerBullets(x, y, AssetPaths.bullet1__png);
 			FlxG.state.add(bullet);
 		}
 	}
 
 	public function move()
 	{
-		if (FlxG.keys.pressed.LEFT)
+		if (FlxG.keys.pressed.RIGHT)
 			x += 2 * 60 * FlxG.elapsed;
 		if (FlxG.keys.pressed.LEFT)
 			x -= 2 * 60 * FlxG.elapsed;
