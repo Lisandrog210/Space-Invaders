@@ -17,8 +17,6 @@ class PlayerBullets extends FlxSprite
 	{
 		super(X, Y, SimpleGraphic);
 		
-		loadGraphic(AssetPaths.bullet1__png);
-		
 		scale.set(0.5, 0.5);
 		
 		velocity.y = -shotVel;
