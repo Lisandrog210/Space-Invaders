@@ -38,6 +38,8 @@ class Player extends FlxSprite
 		if (FlxG.keys.justPressed.SPACE)
 		{
 			var bullet:PlayerBullets = new PlayerBullets(x, y, AssetPaths.bullet1__png);
+			bullet.x = x - 2 + width / 2;
+			bullet.y = y + height / 2;
 			FlxG.state.add(bullet);
 		}
 	}
