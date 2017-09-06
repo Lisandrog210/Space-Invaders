@@ -6,12 +6,19 @@ import flixel.system.FlxAssets.FlxGraphicAsset;
 
 class Player extends FlxSprite
 {
+	private var bullet:PlayerBullets;
 
+	
+	
+	
 	public function new(?x:Float=80, ?y:Float=140, ?SimpleGraphic:FlxGraphicAsset)
 	{
 		super(x, y, SimpleGraphic);
 		scale.set(1, 1);
-
+		
+		bullet = new PlayerBullets(x, y, AssetPaths.bullet1__png);
+		FlxG.state.add(bullet);
+		bullet.kill();
 	}
 
 	override public function update (elapsed:Float):Void
@@ -35,16 +42,14 @@ class Player extends FlxSprite
 	public function shoot()
 	{
 
-		if (FlxG.keys.justPressed.SPACE)
+		if (FlxG.keys.justPressed.SPACE && bullet.alive==false)
 		{
-			bullet.isOnScreen(?Camera:FlxCamera):Bool
-			var bullet:PlayerBullets = new PlayerBullets(x, y, AssetPaths.bullet1__png);
-
-			bullet.x = x - 2 + width / 2;
-			bullet.y = y + height / 2;			
-			FlxG.state.add(bullet);
+			bullet.reset(x - 2 + width / 2, y + height / 2);
+			bullet.velocity.y = (PlayerBullets.shotVel)*-1;
 
 		}
+		
+		
 
 	}
 
