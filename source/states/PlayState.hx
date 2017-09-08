@@ -33,8 +33,8 @@ class PlayState extends FlxState
 		super.create();
 		FlxG.camera.bgColor = FlxColor.BLACK;
 
-		player1 = new Player (10, 120, AssetPaths.canon__png);
-		add(player1);
+		player1 = new Player (10, 135, AssetPaths.canon__png);   
+		add(player1);   
 
 		shield1 = new Shields (1, 120, AssetPaths.Shield1__png);
 		add(shield1);
@@ -95,6 +95,10 @@ class PlayState extends FlxState
 				GrupoEne.remove(GrupoEne.members[i], true);
 				player1.bullet.kill();
 			}
+		}
+		if (FlxG.overlap(GrupoEne,player1)) 
+		{
+			player1.kill();
 		}
 	}
 
