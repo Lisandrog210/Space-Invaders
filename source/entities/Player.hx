@@ -6,10 +6,7 @@ import flixel.system.FlxAssets.FlxGraphicAsset;
 
 class Player extends FlxSprite
 {
-	private var bullet:PlayerBullets;
-
-	
-	
+	private var bullet:PlayerBullets;	
 	
 	public function new(?x:Float=80, ?y:Float=140, ?SimpleGraphic:FlxGraphicAsset)
 	{
@@ -28,7 +25,6 @@ class Player extends FlxSprite
 		move();
 		shoot();
 		checkBoundaries();
-
 	}
 
 	public function checkBoundaries()
@@ -41,16 +37,11 @@ class Player extends FlxSprite
 
 	public function shoot()
 	{
-
 		if (FlxG.keys.justPressed.SPACE && bullet.alive==false)
 		{
 			bullet.reset(x - 2 + width / 2, y + height / 2);
 			bullet.velocity.y = (PlayerBullets.shotVel)*-1;
-
 		}
-		
-		
-
 	}
 
 	public function move()
@@ -59,7 +50,6 @@ class Player extends FlxSprite
 			x += 2 * 60 * FlxG.elapsed;
 		if (FlxG.keys.pressed.LEFT)
 			x -= 2 * 60 * FlxG.elapsed;
-
 	}
 
 }
