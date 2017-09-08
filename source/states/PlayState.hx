@@ -49,25 +49,25 @@ class PlayState extends FlxState
 			if (FilaEntera < 4)
 			{
 				var enem: Enemies = new Enemies(i*20, 0, AssetPaths.nave1__png);
-				add(enem);
+				GrupoEne.add(enem);
 				FilaEntera+1;
 			}
 			if (FilaEntera < 4)
 			{
 				var enem: Enemies = new Enemies(i*20, 15, AssetPaths.nave1__png);
-				add(enem);
+				GrupoEne.add(enem);
 				FilaEntera+1;
 			}
 			if (FilaEntera < 4)
 			{
 				var enem: Enemies = new Enemies(i*20, 30, AssetPaths.nave1__png);
-				add(enem);
+				GrupoEne.add(enem);
 				FilaEntera+1;
 			}
 			if (FilaEntera < 4)
 			{
 				var enem: Enemies = new Enemies(i*20, 45, AssetPaths.nave1__png);
-				add(enem);
+				GrupoEne.add(enem);
 				FilaEntera+1;
 			}
 
@@ -75,9 +75,22 @@ class PlayState extends FlxState
 
 		add(GrupoEne);
 	}
+	function collision():Void
+	{
+		for (i in 0...GrupoEne.members.length) 
+		{
+			if (FlxG.overlap(GrupoEne.members[i], player1.bullet))
+			{
+				GrupoEne.remove(GrupoEne.members[i], true);
+				player1.bullet.kill();
+			}
+		}
+	}
 
 	override public function update(elapsed:Float):Void
 	{
 		super.update(elapsed);
+		collision();
+
 	}
 }

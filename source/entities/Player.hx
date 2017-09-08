@@ -6,7 +6,8 @@ import flixel.system.FlxAssets.FlxGraphicAsset;
 
 class Player extends FlxSprite
 {
-	private var bullet:PlayerBullets;	
+	public var bullet(get, null):PlayerBullets;
+
 	
 	public function new(?x:Float=80, ?y:Float=140, ?SimpleGraphic:FlxGraphicAsset)
 	{
@@ -50,6 +51,11 @@ class Player extends FlxSprite
 			x += 2 * 60 * FlxG.elapsed;
 		if (FlxG.keys.pressed.LEFT)
 			x -= 2 * 60 * FlxG.elapsed;
+	}
+	
+	function get_bullet():PlayerBullets 
+	{
+		return bullet;
 	}
 
 }

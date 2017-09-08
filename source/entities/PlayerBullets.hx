@@ -26,11 +26,7 @@ class PlayerBullets extends FlxSprite
 		super.update(elapsed);
 
 		if (y < 0)
-		{
 			kill();
-			
-		}
-
 	}
 
 }
