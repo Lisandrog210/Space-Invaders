@@ -14,6 +14,7 @@ import flixel.system.FlxAssets.FlxGraphicAsset;
 class Enemies extends FlxSprite 
 {
 	private var OriginalX: Int;
+	private var Bullet: BalasEnem;
 	
 	public function new(?X:Int=0, ?Y:Int=0, ?SimpleGraphic:FlxGraphicAsset) 
 	{
@@ -44,6 +45,13 @@ class Enemies extends FlxSprite
 			velocity.x = -velocity.x;
 			y = y + 5;
 		}
+	}
+	
+	public function shoot()
+	{
+		Bullet = new BalasEnem(x, y, AssetPaths.bullet1__png);
+		Bullet.velocity.y = 10;
+		FlxG.state.add(Bullet);
 	}
 	
 }

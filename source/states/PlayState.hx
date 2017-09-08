@@ -1,11 +1,13 @@
 package states;
 
 import entities.Shields;
+import entities.BalasEnem;
 import flixel.FlxState;
 import entities.Enemies;
 import entities.Player;
 import flixel.FlxState;
 import flixel.FlxG;
+import flixel.math.FlxRandom;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import flixel.group.FlxGroup.FlxTypedGroup;
@@ -17,6 +19,10 @@ class PlayState extends FlxState
 	private var player1:Player;
 	private var orientacion:Bool;
 	private var FilaEntera:Int = 0;
+	private var GrupoDspEne:FlxTypedGroup<BalasEnem>;
+	private var Randm: Int;
+	private var Timer: Float = 0;
+	
 	private var shield1:Shields;
 	private var shield2:Shields;
 	private var shield3:Shields;
@@ -43,7 +49,14 @@ class PlayState extends FlxState
 		add(shield4);
 
 		GrupoEne = new FlxTypedGroup<Enemies>();
-
+		GrupoDspEne = new FlxTypedGroup<BalasEnem>();
+		
+		for (j in 0...4) 
+		{
+			var BalasEn = new BalasEnem();
+			GrupoDspEne.add(BalasEn);
+		}
+     
 		for (i in 0...7)
 		{
 			if (FilaEntera < 4)
@@ -69,10 +82,8 @@ class PlayState extends FlxState
 				var enem: Enemies = new Enemies(i*20, 45, AssetPaths.nave1__png);
 				GrupoEne.add(enem);
 				FilaEntera+1;
-			}
-
+			}	
 		}
-
 		add(GrupoEne);
 	}
 	function collision():Void
@@ -90,7 +101,26 @@ class PlayState extends FlxState
 	override public function update(elapsed:Float):Void
 	{
 		super.update(elapsed);
+		Tiempo(elapsed);
 		collision();
 
+	}
+	
+	function Tiempo(elapsed) 
+	{
+		Timer = Timer + elapsed;
+		
+		if (Timer > 2) 
+		{
+			EnemyShoot();
+			Timer = 0;
+		}
+	}
+	
+	function EnemyShoot() 
+	{
+		var Random = new FlxRandom();
+		Randm = Random.int(0, 27);
+		GrupoEne.members[Randm].shoot();
 	}
 }
