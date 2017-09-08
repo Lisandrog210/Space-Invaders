@@ -5,12 +5,12 @@ import entities.BalasEnem;
 import flixel.FlxState;
 import entities.Enemies;
 import entities.Player;
-import flixel.FlxState;
 import flixel.FlxG;
 import flixel.math.FlxRandom;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import flixel.group.FlxGroup.FlxTypedGroup;
+import entities.Ufo;
 
 class PlayState extends FlxState
 {
@@ -19,12 +19,16 @@ class PlayState extends FlxState
 	private var player1:Player;
 	private var orientacion:Bool;
 	private var FilaEntera:Int = 0;
-  	private var Randm: Int;
+	private var GrupoDspEne:FlxTypedGroup<BalasEnem>;
+	private var Randm: Int;
+	private var RandomUfo:Int;
 	private var Timer: Float = 0;
+
 	private var shield1:Shields;
 	private var shield2:Shields;
 	private var shield3:Shields;
 	private var shield4:Shields;
+	public var ufo1(get, null):Ufo;
 
 	override public function create():Void
 	{
@@ -45,6 +49,10 @@ class PlayState extends FlxState
 
 		shield4 = new Shields (120, 120, AssetPaths.Shield1__png);
 		add(shield4);
+
+		ufo1 = new Ufo (140, 0, AssetPaths.ufo__png);
+		FlxG.state.add(ufo1);
+		ufo1.kill();
 
 		GrupoEne = new FlxTypedGroup<Enemies>();
 		
@@ -92,7 +100,7 @@ class PlayState extends FlxState
 	}
 	function collision():Void
 	{
-		for (i in 0...GrupoEne.members.length) 
+		for (i in 0...GrupoEne.members.length)
 		{
 			if (FlxG.overlap(GrupoEne.members[i], player1.bullet))
 			{
@@ -111,24 +119,53 @@ class PlayState extends FlxState
 		super.update(elapsed);
 		Tiempo(elapsed);
 		collision();
-
+		UfoCreate();
+		ufoCollision();
 	}
-	
-	function Tiempo(elapsed) 
+
+	function Tiempo(elapsed)
 	{
 		Timer = Timer + elapsed;
-		
-		if (Timer > 2) 
+
+		if (Timer > 2)
 		{
 			EnemyShoot();
 			Timer = 0;
 		}
 	}
-	
-	function EnemyShoot() 
+
+	function EnemyShoot()
 	{
 		var Random = new FlxRandom();
 		Randm = Random.int(0, GrupoEne.length - 1);
 		GrupoEne.members[Randm].shoot();
+	}
+
+	function UfoCreate()
+	{
+		if (ufo1.alive==false)
+		{
+			var Random = new FlxRandom();
+			RandomUfo = Random.int(0, 160);
+
+			if (RandomUfo==5)
+			{
+				ufo1.reset(140,0);
+				add(ufo1);
+			}
+		}
+	}
+
+	function ufoCollision()
+	{
+		if (FlxG.overlap(ufo1,player1.bullet)) 
+		{
+			ufo1.kill();
+		}
+	}
+	
+	function get_ufo1():Ufo 
+	{
+		return ufo1;
 	}
 }

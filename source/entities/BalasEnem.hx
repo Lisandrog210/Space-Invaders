@@ -3,10 +3,7 @@ package entities;
 import flixel.FlxSprite;
 import flixel.system.FlxAssets.FlxGraphicAsset;
 
-/**
- * ...
- * @author ...
- */
+
 class BalasEnem extends FlxSprite 
 {
 	
@@ -14,6 +11,7 @@ class BalasEnem extends FlxSprite
 	{
 		super(X, Y, SimpleGraphic);
 		
+		scale.set(0.5,0.5);
 		velocity.y = 10;
 	}
 	

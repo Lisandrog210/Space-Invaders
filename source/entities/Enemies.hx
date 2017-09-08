@@ -51,7 +51,7 @@ class Enemies extends FlxSprite
 	
 	public function shoot()
 	{
-		Bullet = new BalasEnem(x, y, AssetPaths.bullet1__png);
+		Bullet = new BalasEnem(x - 2 + width / 2, y + height / 2, AssetPaths.bullet1__png);
 		Bullet.velocity.y = 10;
 		FlxG.state.add(Bullet);
 	}
