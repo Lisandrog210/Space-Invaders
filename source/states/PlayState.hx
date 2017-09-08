@@ -83,18 +83,8 @@ class PlayState extends FlxState
 				GrupoEne.add(enem);
 				FilaEntera+1;
 			}
-			if (FilaEntera < 6)
-			{
-				var enem: Enemies = new Enemies(i*15, 60, AssetPaths.nave1__png);
-				GrupoEne.add(enem);
-				FilaEntera+1;
-			}
-			if (FilaEntera < 6)
-			{
-				var enem: Enemies = new Enemies(i*15, 70, AssetPaths.nave1__png);
-				GrupoEne.add(enem);
-				FilaEntera+1;
-			}
+			
+			
 		}
 		add(GrupoEne);
 	}

@@ -42,7 +42,7 @@ class Enemies extends FlxSprite
 			velocity.x = -velocity.x;
 			y = y + 5;
 		}
-		if (x >= OriginalX + 80) 
+		if (x >= OriginalX + 10) 
 		{
 			velocity.x = -velocity.x;
 			y = y + 5;
