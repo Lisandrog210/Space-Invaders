@@ -13,12 +13,15 @@ import flixel.system.FlxAssets.FlxGraphicAsset;
 
 class Enemies extends FlxSprite 
 {
-	private var vel:Float = 0.25;
-	private var direccion: Int = 1;
-
-	public function new(?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset) 
+	private var OriginalX: Int;
+	
+	public function new(?X:Int=0, ?Y:Int=0, ?SimpleGraphic:FlxGraphicAsset) 
 	{
 		super(X, Y, SimpleGraphic);
+		
+		OriginalX = X;
+		
+		velocity.x = 5;
 		
 	}
 	
@@ -31,21 +34,16 @@ class Enemies extends FlxSprite
 	
 	public function move()
 	{
-		while (y < FlxG.height && x >= 0) 
+		if (x <= OriginalX) 
 		{
-			x = x + vel * direccion;
-			
-			if (x >= FlxG.width || x <= 0)
-			{
-				y = y + 15;
-				direccion = direccion * -1;
-			}
-			break;
+			velocity.x = -velocity.x;
+			y = y + 5;
 		}
-		
-		
-		
-		
+		if (x >= OriginalX + 22) 
+		{
+			velocity.x = -velocity.x;
+			y = y + 5;
+		}
 	}
 	
 }
