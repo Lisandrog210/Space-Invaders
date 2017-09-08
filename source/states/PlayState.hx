@@ -19,10 +19,8 @@ class PlayState extends FlxState
 	private var player1:Player;
 	private var orientacion:Bool;
 	private var FilaEntera:Int = 0;
-	private var GrupoDspEne:FlxTypedGroup<BalasEnem>;
-	private var Randm: Int;
+  	private var Randm: Int;
 	private var Timer: Float = 0;
-	
 	private var shield1:Shields;
 	private var shield2:Shields;
 	private var shield3:Shields;
@@ -49,40 +47,46 @@ class PlayState extends FlxState
 		add(shield4);
 
 		GrupoEne = new FlxTypedGroup<Enemies>();
-		GrupoDspEne = new FlxTypedGroup<BalasEnem>();
 		
-		for (j in 0...4) 
-		{
-			var BalasEn = new BalasEnem();
-			GrupoDspEne.add(BalasEn);
-		}
      
-		for (i in 0...7)
+		for (i in 0...10)
 		{
-			if (FilaEntera < 4)
+			if (FilaEntera < 6)
 			{
-				var enem: Enemies = new Enemies(i*20, 0, AssetPaths.nave1__png);
+				var enem: Enemies = new Enemies(i*15, 20, AssetPaths.nave1__png);
 				GrupoEne.add(enem);
 				FilaEntera+1;
 			}
-			if (FilaEntera < 4)
+			if (FilaEntera < 6)
 			{
-				var enem: Enemies = new Enemies(i*20, 15, AssetPaths.nave1__png);
+				var enem: Enemies = new Enemies(i*15, 30, AssetPaths.nave1__png);
 				GrupoEne.add(enem);
 				FilaEntera+1;
 			}
-			if (FilaEntera < 4)
+			if (FilaEntera < 6)
 			{
-				var enem: Enemies = new Enemies(i*20, 30, AssetPaths.nave1__png);
+				var enem: Enemies = new Enemies(i*15, 40, AssetPaths.nave1__png);
 				GrupoEne.add(enem);
 				FilaEntera+1;
 			}
-			if (FilaEntera < 4)
+			if (FilaEntera < 6)
 			{
-				var enem: Enemies = new Enemies(i*20, 45, AssetPaths.nave1__png);
+				var enem: Enemies = new Enemies(i*15, 50, AssetPaths.nave1__png);
 				GrupoEne.add(enem);
 				FilaEntera+1;
-			}	
+			}
+			if (FilaEntera < 6)
+			{
+				var enem: Enemies = new Enemies(i*15, 60, AssetPaths.nave1__png);
+				GrupoEne.add(enem);
+				FilaEntera+1;
+			}
+			if (FilaEntera < 6)
+			{
+				var enem: Enemies = new Enemies(i*15, 70, AssetPaths.nave1__png);
+				GrupoEne.add(enem);
+				FilaEntera+1;
+			}
 		}
 		add(GrupoEne);
 	}
@@ -124,7 +128,7 @@ class PlayState extends FlxState
 	function EnemyShoot() 
 	{
 		var Random = new FlxRandom();
-		Randm = Random.int(0, 27);
+		Randm = Random.int(0, GrupoEne.length - 1);
 		GrupoEne.members[Randm].shoot();
 	}
 }

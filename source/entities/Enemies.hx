@@ -20,6 +20,8 @@ class Enemies extends FlxSprite
 	{
 		super(X, Y, SimpleGraphic);
 		
+		scale.set(0.5, 0.5);
+		
 		OriginalX = X;
 		
 		velocity.x = 5;
@@ -40,7 +42,7 @@ class Enemies extends FlxSprite
 			velocity.x = -velocity.x;
 			y = y + 5;
 		}
-		if (x >= OriginalX + 22) 
+		if (x >= OriginalX + 80) 
 		{
 			velocity.x = -velocity.x;
 			y = y + 5;
