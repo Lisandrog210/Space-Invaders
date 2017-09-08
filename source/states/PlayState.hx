@@ -23,40 +23,40 @@ class PlayState extends FlxState
 	private var Randm: Int;
 	private var RandomUfo:Int;
 	private var Timer: Float = 0;
-
-	private var shield1:Shields;
-	private var shield2:Shields;
-	private var shield3:Shields;
-	private var shield4:Shields;
 	public var ufo1(get, null):Ufo;
+	public var GrupoShields:FlxTypedGroup<Shields>;
 
 	override public function create():Void
 	{
 		super.create();
 		FlxG.camera.bgColor = FlxColor.BLACK;
 
-		player1 = new Player (10, 135, AssetPaths.canon__png);   
-		add(player1);   
-
-		shield1 = new Shields (1, 120, AssetPaths.Shield1__png);
-		add(shield1);
-
-		shield2 = new Shields (40, 120, AssetPaths.Shield1__png);
-		add(shield2);
-
-		shield3 = new Shields (80, 120, AssetPaths.Shield1__png);
-		add(shield3);
-
-		shield4 = new Shields (120, 120, AssetPaths.Shield1__png);
-		add(shield4);
+		player1 = new Player (10, 135, AssetPaths.canon__png);
+		add(player1);
 
 		ufo1 = new Ufo (140, 0, AssetPaths.ufo__png);
 		FlxG.state.add(ufo1);
 		ufo1.kill();
 
 		GrupoEne = new FlxTypedGroup<Enemies>();
-		
-     
+		GrupoShields = new FlxTypedGroup<Shields>();
+
+		for (i in 0...3)
+		{
+			var shield:Shields = new Shields(1, 120, AssetPaths.Shield1__png);
+			GrupoShields.add(shield);
+
+			var shield:Shields = new Shields(40, 120, AssetPaths.Shield1__png;
+			GrupoShields.add(shield);
+
+			var shield:Shields = new Shields(80, 120, AssetPaths.Shield1__png);
+			GrupoShields.add(shield);
+
+			var shield:Shields = new Shields(120, 120, AssetPaths.Shield1__png);
+			GrupoShields.add(shield);
+		}
+		add(GrupoShields);
+
 		for (i in 0...10)
 		{
 			if (FilaEntera < 6)
@@ -83,8 +83,7 @@ class PlayState extends FlxState
 				GrupoEne.add(enem);
 				FilaEntera+1;
 			}
-			
-			
+
 		}
 		add(GrupoEne);
 	}
@@ -98,7 +97,7 @@ class PlayState extends FlxState
 				player1.bullet.kill();
 			}
 		}
-		if (FlxG.overlap(GrupoEne,player1)) 
+		if (FlxG.overlap(GrupoEne,player1))
 		{
 			player1.kill();
 		}
@@ -148,13 +147,13 @@ class PlayState extends FlxState
 
 	function ufoCollision()
 	{
-		if (FlxG.overlap(ufo1,player1.bullet)) 
+		if (FlxG.overlap(ufo1,player1.bullet))
 		{
 			ufo1.kill();
 		}
 	}
-	
-	function get_ufo1():Ufo 
+
+	function get_ufo1():Ufo
 	{
 		return ufo1;
 	}
