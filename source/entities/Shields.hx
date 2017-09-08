@@ -16,9 +16,8 @@ class Shields extends FlxSprite
 	override public function update(elapsed)
 	{
 		super.update(elapsed);
-
-		scale.set(0.8,0.8);
-
+		
+		scale.set(0.5,0.5);
 		
 
 		if (shieldLife == 2)

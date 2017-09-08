@@ -34,7 +34,7 @@ class PlayState extends FlxState
 		player1 = new Player (10, 135, AssetPaths.canon__png);
 		add(player1);
 
-		ufo1 = new Ufo (140, 0, AssetPaths.ufo__png);
+		ufo1 = new Ufo (140, 0, AssetPaths.nave extra__png);
 		FlxG.state.add(ufo1);
 		ufo1.kill();
 
