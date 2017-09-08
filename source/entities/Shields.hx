@@ -5,8 +5,10 @@ import flixel.system.FlxAssets.FlxGraphicAsset;
 
 class Shields extends FlxSprite
 {
-
-	public function new(?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset) 
+	
+	static public var shieldLife:Int;
+	
+	public function new(?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset, shieldLife = 4) 
 	{
 		super(X, Y, SimpleGraphic);		
 	}
@@ -16,8 +18,29 @@ class Shields extends FlxSprite
 		super.update(elapsed);
 		
 		scale.set(0.8,0.8);
-
-		/*if (/*if de colision de disparo de disparos de enemigos))*/
+		
+		if (true/*ACA VA SI COLISIONA LA BALA DEL ENEMIGO CON EL SHIELD*/)
+		{
+			shieldLife - 1;
+		}
+		
+		
+		if (shieldLife == 2)
+		{
+			loadGraphic(AssetPaths.Shield2__png);
+		}
+		
+		if (shieldLife == 1)
+		{
+			loadGraphic(AssetPaths.Shield3__png);
+		}
+		
+		if (shieldLife == 0)
+		{
+			kill();
+		}
+		
+		
 		
 
 	}
