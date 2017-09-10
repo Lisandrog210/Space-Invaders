@@ -34,7 +34,7 @@ class PlayState extends FlxState
 		player1 = new Player (10, 135, AssetPaths.canon__png);
 		add(player1);
 
-		ufo1 = new Ufo (140, 0, AssetPaths.nave extra__png);
+		ufo1 = new Ufo (140, 0, AssetPaths.nave_extra__png);
 		FlxG.state.add(ufo1);
 		ufo1.kill();
 
@@ -46,7 +46,7 @@ class PlayState extends FlxState
 			var shield:Shields = new Shields(1, 120, AssetPaths.Shield1__png);
 			GrupoShields.add(shield);
 
-			var shield:Shields = new Shields(40, 120, AssetPaths.Shield1__png;
+			var shield:Shields = new Shields(40, 120, AssetPaths.Shield1__png);
 			GrupoShields.add(shield);
 
 			var shield:Shields = new Shields(80, 120, AssetPaths.Shield1__png);
@@ -101,7 +101,11 @@ class PlayState extends FlxState
 		{
 			player1.kill();
 		}
-	}
+		//if (FlxG.overlap(enemigo.Bullet1,player1)) 
+		//{
+		//	player1.kill();
+		//}
+	}   //
 
 	override public function update(elapsed:Float):Void
 	{
