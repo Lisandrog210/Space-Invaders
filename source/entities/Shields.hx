@@ -8,7 +8,7 @@ class Shields extends FlxSprite
 
 	static public var shieldLife:Int;
 
-	public function new(?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset, shieldLife = 4)
+	public function new(?X:Float = 0, ?Y:Float = 0, ?SimpleGraphic:FlxGraphicAsset, ?shieldLife:Int)
 	{
 		super(X, Y, SimpleGraphic);
 	}
@@ -17,24 +17,28 @@ class Shields extends FlxSprite
 	{
 		super.update(elapsed);
 		
-		scale.set(0.5,0.5);
+		scale.set(0.5, 0.5);
 		
+		shieldChange();
 
+	}
+	
+	public function shieldChange() 
+	{
 		if (shieldLife == 2)
 		{
 			loadGraphic(AssetPaths.Shield2__png);
 		}
 
-		if (shieldLife == 1)
+		else if (shieldLife == 1)
 		{
 			loadGraphic(AssetPaths.Shield3__png);
 		}
 
-		if (shieldLife == 0)
+		else if (shieldLife == 0)
 		{
 			kill();
 		}
-
 	}
 
 }

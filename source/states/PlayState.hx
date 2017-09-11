@@ -25,6 +25,7 @@ class PlayState extends FlxState
 	private var Timer: Float = 0;
 	public var ufo1(get, null):Ufo;
 	public var GrupoShields:FlxTypedGroup<Shields>;
+	public var collide2:Bool;
 
 	override public function create():Void
 	{
@@ -41,19 +42,10 @@ class PlayState extends FlxState
 		GrupoEne = new FlxTypedGroup<Enemies>();
 		GrupoShields = new FlxTypedGroup<Shields>();
 
-		for (j in 0...3)
+		for (j in 0...4)
 		{
-			var shield:Shields = new Shields(5, 120, AssetPaths.Shield1__png);
-			GrupoShields.add(shield);
-
-			var shield:Shields = new Shields(40, 120, AssetPaths.Shield1__png);
-			GrupoShields.add(shield);
-
-			var shield:Shields = new Shields(80, 120, AssetPaths.Shield1__png);
-			GrupoShields.add(shield);
-
-			var shield:Shields = new Shields(120, 120, AssetPaths.Shield1__png);
-			GrupoShields.add(shield);
+			var shield:Shields = new Shields(j*40+5, 120, AssetPaths.Shield1__png,4);
+			GrupoShields.add(shield);			
 		}
 		add(GrupoShields);
 
@@ -112,6 +104,24 @@ class PlayState extends FlxState
 				if (FlxG.collide(GrupoEne.members[j].Bullet1,player1))
 				{
 					player1.kill();
+					GrupoEne.members[j].Bullet1.kill();
+				}
+			}
+
+		}
+	}
+
+	function collisionEnemBulletyShield():Void
+	{
+		for (j	in 0...GrupoEne.length)
+		{
+			if (GrupoEne.members[j].Bullet1 != null)
+			{
+				if (FlxG.collide(GrupoEne.members[j].Bullet1,GrupoShields.members[j]))
+				{
+					Shields.shieldLife - 1;
+					GrupoEne.members[j].Bullet1.kill();
+
 				}
 			}
 
@@ -126,6 +136,7 @@ class PlayState extends FlxState
 		UfoCreate();
 		ufoCollision();
 		collisionEnemBulletyPlayer();
+		collisionEnemBulletyShield();
 	}
 
 	function Tiempo(elapsed)
