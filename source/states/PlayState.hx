@@ -45,7 +45,7 @@ class PlayState extends FlxState
 		for (j in 0...4)
 		{
 			var shield:Shields = new Shields(j*40+5, 120, AssetPaths.Shield1__png,4);
-			GrupoShields.add(shield);			
+			GrupoShields.add(shield);
 		}
 		add(GrupoShields);
 
@@ -79,6 +79,19 @@ class PlayState extends FlxState
 		}
 		add(GrupoEne);
 	}
+
+	override public function update(elapsed:Float):Void
+	{
+		super.update(elapsed);
+		Tiempo(elapsed);
+		collision();
+		UfoCreate();
+		ufoCollision();
+		collisionEnemBulletyPlayer();
+		collisionEnemBulletyShield();
+		collisionEnemiesShield();
+	}
+
 	function collision():Void
 	{
 		for (i in 0...GrupoEne.members.length)
@@ -101,7 +114,7 @@ class PlayState extends FlxState
 		{
 			if (GrupoEne.members[j].Bullet1 != null)
 			{
-				if (FlxG.collide(GrupoEne.members[j].Bullet1,player1))
+				if (FlxG.overlap(GrupoEne.members[j].Bullet1,player1))
 				{
 					player1.kill();
 					GrupoEne.members[j].Bullet1.kill();
@@ -111,13 +124,13 @@ class PlayState extends FlxState
 		}
 	}
 
-	function collisionEnemBulletyShield():Void
+	function collisionEnemBulletyShield():Void //no funca o no funca el update del shield q le cambia el sprite
 	{
 		for (j	in 0...GrupoEne.length)
 		{
 			if (GrupoEne.members[j].Bullet1 != null)
 			{
-				if (FlxG.collide(GrupoEne.members[j].Bullet1,GrupoShields.members[j]))
+				if (FlxG.overlap(GrupoEne.members[j].Bullet1,GrupoShields.members[j]))
 				{
 					Shields.shieldLife - 1;
 					GrupoEne.members[j].Bullet1.kill();
@@ -128,15 +141,19 @@ class PlayState extends FlxState
 		}
 	}
 
-	override public function update(elapsed:Float):Void
+	function collisionEnemiesShield():Void //no funca o no funca el update del shield q le cambia el sprite
 	{
-		super.update(elapsed);
-		Tiempo(elapsed);
-		collision();
-		UfoCreate();
-		ufoCollision();
-		collisionEnemBulletyPlayer();
-		collisionEnemBulletyShield();
+		for (j	in 0...GrupoEne.length)
+		{
+
+			if (FlxG.overlap(GrupoEne.members[j],GrupoShields.members[j]))
+			{
+				Shields.shieldLife - 1;
+				GrupoEne.members[j].kill();
+
+			}
+
+		}
 	}
 
 	function Tiempo(elapsed)
