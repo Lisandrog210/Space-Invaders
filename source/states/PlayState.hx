@@ -41,9 +41,9 @@ class PlayState extends FlxState
 		GrupoEne = new FlxTypedGroup<Enemies>();
 		GrupoShields = new FlxTypedGroup<Shields>();
 
-		for (i in 0...3)
+		for (j in 0...3)
 		{
-			var shield:Shields = new Shields(1, 120, AssetPaths.Shield1__png);
+			var shield:Shields = new Shields(5, 120, AssetPaths.Shield1__png);
 			GrupoShields.add(shield);
 
 			var shield:Shields = new Shields(40, 120, AssetPaths.Shield1__png);
@@ -101,11 +101,22 @@ class PlayState extends FlxState
 		{
 			player1.kill();
 		}
-		//if (FlxG.overlap(enemigo.Bullet1,player1)) 
-		//{
-		//	player1.kill();
-		//}
-	}   //
+	}
+
+	function collisionEnemBulletyPlayer():Void
+	{
+		for (j	in 0...GrupoEne.length)
+		{
+			if (GrupoEne.members[j].Bullet1 != null)
+			{
+				if (FlxG.collide(GrupoEne.members[j].Bullet1,player1))
+				{
+					player1.kill();
+				}
+			}
+
+		}
+	}
 
 	override public function update(elapsed:Float):Void
 	{
@@ -114,6 +125,7 @@ class PlayState extends FlxState
 		collision();
 		UfoCreate();
 		ufoCollision();
+		collisionEnemBulletyPlayer();
 	}
 
 	function Tiempo(elapsed)
@@ -139,7 +151,7 @@ class PlayState extends FlxState
 		if (ufo1.alive==false)
 		{
 			var Random = new FlxRandom();
-			RandomUfo = Random.int(0, 160);
+			RandomUfo = Random.int(0, 300);
 
 			if (RandomUfo==5)
 			{
