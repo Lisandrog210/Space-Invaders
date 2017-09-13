@@ -20,11 +20,10 @@ class Enemies extends FlxSprite
 	{
 		super(X, Y, SimpleGraphic);
 		
-		scale.set(0.5, 0.5);
-		
-		OriginalX = X;
-		
+		scale.set(0.5, 0.5);		
+		OriginalX = X;		
 		velocity.x = 5;
+		updateHitbox();
 		
 	}
 	

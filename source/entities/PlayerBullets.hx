@@ -19,6 +19,7 @@ class PlayerBullets extends FlxSprite
 
 		scale.set(0.5, 0.5);
 		velocity.y = -shotVel;
+		updateHitbox();
 	}
 
 	override public function update(elapsed)

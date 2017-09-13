@@ -12,6 +12,7 @@ class BalasEnem extends FlxSprite
 		super(X, Y, SimpleGraphic);		
 		scale.set(0.3,0.3);
 		velocity.y = 10;
+		updateHitbox();
 	}
 	
 	override public function update(elapsed:Float):Void 

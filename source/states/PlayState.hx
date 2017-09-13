@@ -44,7 +44,7 @@ class PlayState extends FlxState
 
 		for (j in 0...4)
 		{
-			var shield:Shields = new Shields(j*40+5, 120, AssetPaths.Shield1__png,4);
+			var shield:Shields = new Shields(j*35+18, 120, AssetPaths.Shield1__png,3);
 			GrupoShields.add(shield);
 		}
 		add(GrupoShields);
@@ -133,7 +133,7 @@ class PlayState extends FlxState
 				for (j in 0...GrupoShields.length)
 				{
 
-					if (FlxG.overlap(GrupoEne.members[i].Bullet1,GrupoShields))
+					if (FlxG.overlap(GrupoEne.members[i].Bullet1,GrupoShields.members[j]))
 					{
 						GrupoShields.members[j].shieldChange();
 						GrupoEne.members[i].Bullet1.kill();

@@ -15,6 +15,7 @@ class Shields extends FlxSprite
 		this.shieldLife  = shieldLife;
 		
 		scale.set(0.5, 0.5);
+		updateHitbox();
 	}
 
 	override public function update(elapsed)
@@ -29,11 +30,14 @@ class Shields extends FlxSprite
 		if (shieldLife == 2)
 		{
 			loadGraphic(AssetPaths.Shield2__png);
+			updateHitbox();
+
 		}
 
 		else if (shieldLife == 1)
 		{
 			loadGraphic(AssetPaths.Shield3__png);
+			updateHitbox();
 		}
 
 		else if (shieldLife == 0)
