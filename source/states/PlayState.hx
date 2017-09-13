@@ -90,6 +90,8 @@ class PlayState extends FlxState
 		collisionEnemBulletyPlayer();
 		collisionEnemBulletyShield();
 		collisionEnemiesShield();
+		collisionPlayerBulletShield();
+		collisionPlayerBulletEnemyBullet();
 	}
 
 	function collision():Void
@@ -120,7 +122,6 @@ class PlayState extends FlxState
 					GrupoEne.members[i].Bullet1.kill();
 				}
 			}
-
 		}
 	}
 
@@ -132,16 +133,13 @@ class PlayState extends FlxState
 			{
 				for (j in 0...GrupoShields.length)
 				{
-
 					if (FlxG.overlap(GrupoEne.members[i].Bullet1,GrupoShields.members[j]))
 					{
 						GrupoShields.members[j].shieldChange();
 						GrupoEne.members[i].Bullet1.kill();
-
 					}
 				}
 			}
-
 		}
 	}
 
@@ -157,9 +155,31 @@ class PlayState extends FlxState
 					GrupoEne.members[i].kill();
 				}
 			}
-
 		}
-
+	}
+	
+	function collisionPlayerBulletShield():Void
+	{
+		for (i in 0...GrupoShields.length) 
+		{
+			if (FlxG.overlap(player1.bullet, GrupoShields.members[i])) 
+			{
+				GrupoShields.members[i].shieldChange();
+				player1.bullet.kill();
+			}
+		}
+	}
+	
+	function collisionPlayerBulletEnemyBullet():Void
+	{
+		for (i in 0...GrupoEne.length)
+		{
+			if (FlxG.overlap(player1.bullet, GrupoEne.members[i].Bullet1))
+			{
+				GrupoEne.members[i].Bullet1.kill();
+				player1.bullet.kill();
+			}
+		}
 	}
 
 	function Tiempo(elapsed)
@@ -175,9 +195,12 @@ class PlayState extends FlxState
 
 	function EnemyShoot()
 	{
-		var Random = new FlxRandom();
-		Randm = Random.int(0, GrupoEne.length - 1);
-		GrupoEne.members[Randm].shoot();
+		if (GrupoEne.length != 0) 
+		{
+			var Random = new FlxRandom();
+			Randm = Random.int(0, GrupoEne.length - 1);
+			GrupoEne.members[Randm].shoot();
+		}
 	}
 
 	function UfoCreate()
@@ -186,7 +209,7 @@ class PlayState extends FlxState
 		{
 			var Random = new FlxRandom();
 			RandomUfo = Random.int(0, 300);
-
+			
 			if (RandomUfo==5)
 			{
 				ufo1.reset(140,0);
