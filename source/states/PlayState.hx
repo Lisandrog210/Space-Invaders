@@ -124,35 +124,42 @@ class PlayState extends FlxState
 		}
 	}
 
-	function collisionEnemBulletyShield():Void //no funca
+	function collisionEnemBulletyShield():Void
 	{
 		for (i	in 0...GrupoEne.length)
 		{
 			if (GrupoEne.members[i].Bullet1 != null)
 			{
-				if (FlxG.overlap(GrupoEne.members[i].Bullet1,GrupoShields))
+				for (j in 0...GrupoShields.length)
 				{
-					Shields.shieldLife - 1;
-					GrupoEne.members[i].Bullet1.kill();
 
+					if (FlxG.overlap(GrupoEne.members[i].Bullet1,GrupoShields))
+					{
+						GrupoShields.members[j].shieldChange();
+						GrupoEne.members[i].Bullet1.kill();
+
+					}
 				}
 			}
 
 		}
 	}
 
-	function collisionEnemiesShield():Void //no funca
+	function collisionEnemiesShield():Void
 	{
 		for (i	in 0...GrupoEne.length)
 		{
-			if (FlxG.overlap(GrupoEne.members[i],GrupoShields))
+			for (j in 0...GrupoShields.length)
 			{
-				Shields.shieldLife - 1;
-				GrupoEne.members[i].kill();
-
+				if (FlxG.overlap(GrupoEne.members[i],GrupoShields.members[j]))
+				{
+					GrupoShields.members[j].shieldChange();
+					GrupoEne.members[i].kill();
+				}
 			}
 
 		}
+
 	}
 
 	function Tiempo(elapsed)
