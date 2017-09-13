@@ -6,10 +6,9 @@ import flixel.system.FlxAssets.FlxGraphicAsset;
 
 class Player extends FlxSprite
 {
-	public var bullet(get, null):PlayerBullets;
-
+	public var bullet(get, null):PlayerBullets;	
 	
-	public function new(?x:Float=80, ?y:Float=140, ?SimpleGraphic:FlxGraphicAsset)
+	public function new(?x:Float=80, ?y:Float=140, ?SimpleGraphic:FlxGraphicAsset, ?Lives:Int)
 	{
 		super(x, y, SimpleGraphic);
 		scale.set(1, 1);
@@ -57,5 +56,7 @@ class Player extends FlxSprite
 	{
 		return bullet;
 	}
+	
+	
 
 }

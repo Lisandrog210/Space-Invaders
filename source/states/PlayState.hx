@@ -32,7 +32,7 @@ class PlayState extends FlxState
 		super.create();
 		FlxG.camera.bgColor = FlxColor.BLACK;
 
-		player1 = new Player (10, 135, AssetPaths.canon__png);
+		player1 = new Player (10, 135, AssetPaths.canon__png,3);
 		add(player1);
 
 		ufo1 = new Ufo (140, 0, AssetPaths.nave_extra__png);
