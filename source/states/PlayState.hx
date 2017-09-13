@@ -110,30 +110,30 @@ class PlayState extends FlxState
 
 	function collisionEnemBulletyPlayer():Void
 	{
-		for (j	in 0...GrupoEne.length)
+		for (i	in 0...GrupoEne.length)
 		{
-			if (GrupoEne.members[j].Bullet1 != null)
+			if (GrupoEne.members[i].Bullet1 != null)
 			{
-				if (FlxG.overlap(GrupoEne.members[j].Bullet1,player1))
+				if (FlxG.overlap(GrupoEne.members[i].Bullet1,player1))
 				{
 					player1.kill();
-					GrupoEne.members[j].Bullet1.kill();
+					GrupoEne.members[i].Bullet1.kill();
 				}
 			}
 
 		}
 	}
 
-	function collisionEnemBulletyShield():Void //no funca o no funca el update del shield q le cambia el sprite
+	function collisionEnemBulletyShield():Void //no funca
 	{
-		for (j	in 0...GrupoEne.length)
+		for (i	in 0...GrupoEne.length)
 		{
-			if (GrupoEne.members[j].Bullet1 != null)
+			if (GrupoEne.members[i].Bullet1 != null)
 			{
-				if (FlxG.overlap(GrupoEne.members[j].Bullet1,GrupoShields.members[j]))
+				if (FlxG.overlap(GrupoEne.members[i].Bullet1,GrupoShields))
 				{
 					Shields.shieldLife - 1;
-					GrupoEne.members[j].Bullet1.kill();
+					GrupoEne.members[i].Bullet1.kill();
 
 				}
 			}
@@ -141,15 +141,14 @@ class PlayState extends FlxState
 		}
 	}
 
-	function collisionEnemiesShield():Void //no funca o no funca el update del shield q le cambia el sprite
+	function collisionEnemiesShield():Void //no funca
 	{
-		for (j	in 0...GrupoEne.length)
+		for (i	in 0...GrupoEne.length)
 		{
-
-			if (FlxG.overlap(GrupoEne.members[j],GrupoShields.members[j]))
+			if (FlxG.overlap(GrupoEne.members[i],GrupoShields))
 			{
 				Shields.shieldLife - 1;
-				GrupoEne.members[j].kill();
+				GrupoEne.members[i].kill();
 
 			}
 
