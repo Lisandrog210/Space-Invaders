@@ -15,7 +15,7 @@ class DefeatMenu extends FlxState
 
 	override public function create():Void
 	{
-		Title = new FlxText(5, 5, FlxG.width, "Defeat");
+		Title = new FlxText(50, 54, FlxG.width, "Defeat");
 		Title.setFormat(null, 12, FlxColor.RED);
 		add(Title);
 	}

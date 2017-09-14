@@ -1,5 +1,6 @@
 package states;
 
+import entities.Score;
 import entities.Shields;
 import entities.BalasEnem;
 import flash.display.Sprite;
@@ -29,7 +30,7 @@ class PlayState extends FlxState
 	public var ufo1(get, null):Ufo;
 	public var GrupoShields:FlxTypedGroup<Shields>;
 	public var collide2:Bool;
-	private var score:String;
+	private var score1:String;
 	private var resultado:Bool;
 
 	override public function create():Void
@@ -83,6 +84,8 @@ class PlayState extends FlxState
 			
 		}
 		add(GrupoEne);
+		
+		//score1 = new Score();
 	}
 
 	override public function update(elapsed:Float):Void
