@@ -118,6 +118,8 @@ class PlayState extends FlxState
 		if (FlxG.overlap(GrupoEne,player1))
 		{
 			player1.kill();
+			player1.checkRevive();
+			
 		}
 	}
 
@@ -131,6 +133,7 @@ class PlayState extends FlxState
 				{
 					player1.kill();
 					GrupoEne.members[i].Bullet1.kill();
+					player1.checkRevive();
 				}
 			}
 		}

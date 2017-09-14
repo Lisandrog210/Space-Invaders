@@ -6,13 +6,14 @@ import flixel.system.FlxAssets.FlxGraphicAsset;
 
 class Player extends FlxSprite
 {
-	public var bullet(get, null):PlayerBullets;	
+	public var bullet(get, null):PlayerBullets;
+	public var Lives:Int;
 	
 	public function new(?x:Float=80, ?y:Float=140, ?SimpleGraphic:FlxGraphicAsset, ?Lives:Int)
 	{
 		super(x, y, SimpleGraphic);
 		scale.set(1, 1);
-		
+		this.Lives  = Lives;
 		bullet = new PlayerBullets(x, y, AssetPaths.bullet1__png);
 		FlxG.state.add(bullet);
 		bullet.kill();
@@ -25,6 +26,18 @@ class Player extends FlxSprite
 		move();
 		shoot();
 		checkBoundaries();
+		
+	}
+	
+	public function checkRevive() 
+	{
+		Lives--;
+		if (!alive && Lives != 0) 
+		{
+			
+			reset(70, 135);
+			
+		}
 	}
 
 	public function checkBoundaries()
