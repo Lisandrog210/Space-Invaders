@@ -2,6 +2,7 @@ package states;
 
 import entities.Shields;
 import entities.BalasEnem;
+import flash.display.Sprite;
 import flixel.FlxState;
 import entities.Enemies;
 import entities.Player;
@@ -11,6 +12,8 @@ import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import entities.Ufo;
+import flixel.FlxSprite;
+import flixel.system.FlxAssets.FlxGraphicAsset;
 
 class PlayState extends FlxState
 {
@@ -25,13 +28,21 @@ class PlayState extends FlxState
 	private var Timer: Float = 0;
 	public var ufo1(get, null):Ufo;
 	public var GrupoShields:FlxTypedGroup<Shields>;
-	public var collide2:Bool;
+	public var collide2:Bool;	
+	private var score:String;
 
 	override public function create():Void
 	{
 		super.create();
 		FlxG.camera.bgColor = FlxColor.BLACK;
 
+		var life1 = new FlxSprite (2, 2, AssetPaths.life__png);
+		var life2 = new FlxSprite (12, 2, AssetPaths.life__png);
+		var life3 = new FlxSprite (22, 2, AssetPaths.life__png);
+		add(life1);
+		add(life2);
+		add(life3);
+		
 		player1 = new Player (10, 135, AssetPaths.canon__png,3);
 		add(player1);
 
@@ -157,19 +168,19 @@ class PlayState extends FlxState
 			}
 		}
 	}
-	
+
 	function collisionPlayerBulletShield():Void
 	{
-		for (i in 0...GrupoShields.length) 
+		for (i in 0...GrupoShields.length)
 		{
-			if (FlxG.overlap(player1.bullet, GrupoShields.members[i])) 
+			if (FlxG.overlap(player1.bullet, GrupoShields.members[i]))
 			{
 				GrupoShields.members[i].shieldChange();
 				player1.bullet.kill();
 			}
 		}
 	}
-	
+
 	function collisionPlayerBulletEnemyBullet():Void
 	{
 		for (i in 0...GrupoEne.length)
@@ -195,7 +206,7 @@ class PlayState extends FlxState
 
 	function EnemyShoot()
 	{
-		if (GrupoEne.length != 0) 
+		if (GrupoEne.length != 0)
 		{
 			var Random = new FlxRandom();
 			Randm = Random.int(0, GrupoEne.length - 1);
@@ -209,10 +220,10 @@ class PlayState extends FlxState
 		{
 			var Random = new FlxRandom();
 			RandomUfo = Random.int(0, 300);
-			
+
 			if (RandomUfo==5)
 			{
-				ufo1.reset(140,0);
+				ufo1.reset(140,8);
 				add(ufo1);
 			}
 		}

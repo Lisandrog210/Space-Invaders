@@ -28,7 +28,7 @@ class Shields extends FlxSprite
 	{
 		shieldLife--;
 		if (shieldLife == 2)
-		{
+		{	
 			loadGraphic(AssetPaths.Shield2__png);
 			updateHitbox();
 
