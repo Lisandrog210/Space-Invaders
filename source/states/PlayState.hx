@@ -28,8 +28,11 @@ class PlayState extends FlxState
 	private var Timer: Float = 0;
 	public var ufo1(get, null):Ufo;
 	public var GrupoShields:FlxTypedGroup<Shields>;
-	public var collide2:Bool;	
+	public var collide2:Bool;
 	private var score:String;
+	public  var life1:FlxSprite;
+	public  var life2:FlxSprite;
+	public  var life3:FlxSprite;
 
 	override public function create():Void
 	{
@@ -42,7 +45,7 @@ class PlayState extends FlxState
 		add(life1);
 		add(life2);
 		add(life3);
-		
+
 		player1 = new Player (10, 135, AssetPaths.canon__png,3);
 		add(player1);
 
@@ -103,6 +106,23 @@ class PlayState extends FlxState
 		collisionEnemiesShield();
 		collisionPlayerBulletShield();
 		collisionPlayerBulletEnemyBullet();
+		removeLife();
+	}
+
+	public function removeLife()
+	{
+		if (player1.Lives==2)
+		{
+			life1.destroy();
+		}
+		else if (player1.Lives==1)
+		{
+			life2.destroy();
+		}
+		else if (player1.Lives==0)
+		{
+			life3.destroy();
+		}
 	}
 
 	function collision():Void
@@ -119,7 +139,7 @@ class PlayState extends FlxState
 		{
 			player1.kill();
 			player1.checkRevive();
-			
+
 		}
 	}
 
