@@ -30,39 +30,30 @@ class PlayState extends FlxState
 	public var GrupoShields:FlxTypedGroup<Shields>;
 	public var collide2:Bool;
 	private var score:String;
-	public  var life1:FlxSprite;
-	public  var life2:FlxSprite;
-	public  var life3:FlxSprite;
+	private var resultado:Bool;
 
 	override public function create():Void
 	{
 		super.create();
 		FlxG.camera.bgColor = FlxColor.BLACK;
-
-		var life1 = new FlxSprite (2, 2, AssetPaths.life__png);
-		var life2 = new FlxSprite (12, 2, AssetPaths.life__png);
-		var life3 = new FlxSprite (22, 2, AssetPaths.life__png);
-		add(life1);
-		add(life2);
-		add(life3);
-
+		
 		player1 = new Player (10, 135, AssetPaths.canon__png,3);
 		add(player1);
-
+		
 		ufo1 = new Ufo (140, 0, AssetPaths.nave_extra__png);
 		FlxG.state.add(ufo1);
 		ufo1.kill();
-
+		
 		GrupoEne = new FlxTypedGroup<Enemies>();
 		GrupoShields = new FlxTypedGroup<Shields>();
-
+		
 		for (j in 0...4)
 		{
 			var shield:Shields = new Shields(j*35+18, 120, AssetPaths.Shield1__png,3);
 			GrupoShields.add(shield);
 		}
 		add(GrupoShields);
-
+		
 		for (i in 0...10)
 		{
 			if (FilaEntera < 6)
@@ -89,7 +80,7 @@ class PlayState extends FlxState
 				GrupoEne.add(enem);
 				FilaEntera+1;
 			}
-
+			
 		}
 		add(GrupoEne);
 	}
@@ -97,6 +88,11 @@ class PlayState extends FlxState
 	override public function update(elapsed:Float):Void
 	{
 		super.update(elapsed);
+		if (GrupoEne.length == 0) 
+		{
+			resultado = true;
+			endgame();
+		}
 		Tiempo(elapsed);
 		collision();
 		UfoCreate();
@@ -111,9 +107,9 @@ class PlayState extends FlxState
 
 	public function removeLife()
 	{
-		if (player1.Lives==2)
+		/*if (player1.Lives==2)
 		{
-			life1.destroy();
+			life1.
 		}
 		else if (player1.Lives==1)
 		{
@@ -122,7 +118,7 @@ class PlayState extends FlxState
 		else if (player1.Lives==0)
 		{
 			life3.destroy();
-		}
+		}*/
 	}
 
 	function collision():Void
@@ -139,7 +135,13 @@ class PlayState extends FlxState
 		{
 			player1.kill();
 			player1.checkRevive();
-
+			
+			if (player1.Lives == 0) 
+			{
+				resultado = false;
+				endgame();
+			}
+			
 		}
 	}
 
@@ -154,6 +156,12 @@ class PlayState extends FlxState
 					player1.kill();
 					GrupoEne.members[i].Bullet1.kill();
 					player1.checkRevive();
+					
+					if (player1.Lives == 0) 
+					{
+						resultado = false;
+						endgame();
+					}
 				}
 			}
 		}
@@ -219,7 +227,7 @@ class PlayState extends FlxState
 	function Tiempo(elapsed)
 	{
 		Timer = Timer + elapsed;
-
+		
 		if (Timer > 2)
 		{
 			EnemyShoot();
@@ -234,6 +242,11 @@ class PlayState extends FlxState
 			var Random = new FlxRandom();
 			Randm = Random.int(0, GrupoEne.length - 1);
 			GrupoEne.members[Randm].shoot();
+		}
+		else 
+		{
+			resultado = true;
+			endgame();
 		}
 	}
 
@@ -264,4 +277,18 @@ class PlayState extends FlxState
 	{
 		return ufo1;
 	}
+	
+	function endgame()
+	{
+		if (resultado == true) 
+		{
+			FlxG.switchState(new VictoryMenu());
+		}
+		else 
+		{
+			FlxG.switchState(new DefeatMenu());
+		}
+	}
+	
+	
 }

@@ -2,12 +2,14 @@ package entities;
 
 import flixel.FlxG;
 import flixel.FlxSprite;
+import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.system.FlxAssets.FlxGraphicAsset;
 
 class Player extends FlxSprite
 {
 	public var bullet(get, null):PlayerBullets;
 	public var Lives:Int;
+	private var Totalhealth:FlxTypedGroup<FlxSprite>;
 	
 	public function new(?x:Float=80, ?y:Float=140, ?SimpleGraphic:FlxGraphicAsset, ?Lives:Int)
 	{
@@ -17,6 +19,15 @@ class Player extends FlxSprite
 		bullet = new PlayerBullets(x, y, AssetPaths.bullet1__png);
 		FlxG.state.add(bullet);
 		bullet.kill();
+		Totalhealth = new FlxTypedGroup<FlxSprite>();
+		
+		for (i in 0...Lives) 
+		{
+			var heart:FlxSprite = new FlxSprite(i*10, 2, AssetPaths.Life1__png);
+			Totalhealth.add(heart);
+		}
+		
+		FlxG.state.add(Totalhealth);
 	}
 
 	override public function update (elapsed:Float):Void
@@ -34,9 +45,8 @@ class Player extends FlxSprite
 		Lives--;
 		if (!alive && Lives != 0) 
 		{
-			
 			reset(70, 135);
-			
+			Totalhealth.members[Lives].destroy();
 		}
 	}
 
