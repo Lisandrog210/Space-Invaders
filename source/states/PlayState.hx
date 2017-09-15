@@ -27,31 +27,34 @@ class PlayState extends FlxState
 	public var ufo1(get, null):Ufo;
 	public var GrupoShields:FlxTypedGroup<Shields>;
 	public var collide2:Bool;
-	private var score1:String;
+	private var score:Int = 0;
+	private var scoreText:FlxText;
 	private var resultado:Bool;
 
 	override public function create():Void
 	{
 		super.create();
 		FlxG.camera.bgColor = FlxColor.BLACK;
-		
+
 		player1 = new Player (10, 135, AssetPaths.canon__png,3);
 		add(player1);
-		
+
 		ufo1 = new Ufo (140, 0, AssetPaths.nave_extra__png);
 		FlxG.state.add(ufo1);
 		ufo1.kill();
-		
+
 		GrupoEne = new FlxTypedGroup<Enemies>();
 		GrupoShields = new FlxTypedGroup<Shields>();
-		
+		scoreText = new FlxText(60, 2, 0, "SCORE", 12);
+		add(scoreText);
+
 		for (j in 0...4)
 		{
 			var shield:Shields = new Shields(j*35+18, 120, AssetPaths.Shield1__png,3);
 			GrupoShields.add(shield);
 		}
 		add(GrupoShields);
-		
+
 		for (i in 0...10)
 		{
 			if (FilaEntera < 6)
@@ -78,17 +81,16 @@ class PlayState extends FlxState
 				GrupoEne.add(enem);
 				FilaEntera+1;
 			}
-			
+
 		}
 		add(GrupoEne);
-		
-		//score1 = new Score();
+
 	}
 
 	override public function update(elapsed:Float):Void
 	{
 		super.update(elapsed);
-		if (GrupoEne.length == 0) 
+		if (GrupoEne.length == 0)
 		{
 			resultado = true;
 			endgame();
@@ -102,7 +104,8 @@ class PlayState extends FlxState
 		collisionEnemiesShield();
 		collisionPlayerBulletShield();
 		collisionPlayerBulletEnemyBullet();
-		
+		printScore();
+
 	}
 
 	function collision():Void
@@ -113,19 +116,20 @@ class PlayState extends FlxState
 			{
 				GrupoEne.remove(GrupoEne.members[i], true);
 				player1.bullet.kill();
+				addScoreEnemy();
 			}
 		}
 		if (FlxG.overlap(GrupoEne,player1))
 		{
 			player1.kill();
 			player1.checkRevive();
-			
-			if (player1.Lives == 0) 
+
+			if (player1.Lives == 0)
 			{
 				resultado = false;
 				endgame();
 			}
-			
+
 		}
 	}
 
@@ -140,8 +144,8 @@ class PlayState extends FlxState
 					player1.kill();
 					GrupoEne.members[i].Bullet1.kill();
 					player1.checkRevive();
-					
-					if (player1.Lives == 0) 
+
+					if (player1.Lives == 0)
 					{
 						resultado = false;
 						endgame();
@@ -178,7 +182,7 @@ class PlayState extends FlxState
 				if (FlxG.overlap(GrupoEne.members[i],GrupoShields.members[j]))
 				{
 					GrupoShields.members[j].shieldChange();
-					GrupoEne.members[i].kill();
+					GrupoEne.remove(GrupoEne.members[i], true);
 				}
 			}
 		}
@@ -211,7 +215,7 @@ class PlayState extends FlxState
 	function Tiempo(elapsed)
 	{
 		Timer = Timer + elapsed;
-		
+
 		if (Timer > 2)
 		{
 			EnemyShoot();
@@ -227,7 +231,7 @@ class PlayState extends FlxState
 			Randm = Random.int(0, GrupoEne.length - 1);
 			GrupoEne.members[Randm].shoot();
 		}
-		else 
+		else
 		{
 			resultado = true;
 			endgame();
@@ -254,6 +258,7 @@ class PlayState extends FlxState
 		if (FlxG.overlap(ufo1,player1.bullet))
 		{
 			ufo1.kill();
+			addScoreUfo();
 		}
 	}
 
@@ -261,18 +266,31 @@ class PlayState extends FlxState
 	{
 		return ufo1;
 	}
-	
+
 	function endgame()
 	{
-		if (resultado == true) 
+		if (resultado == true)
 		{
 			FlxG.switchState(new VictoryMenu());
 		}
-		else 
+		else
 		{
 			FlxG.switchState(new DefeatMenu());
 		}
 	}
-	
-	
+
+	public function addScoreEnemy()
+	{
+		score += 10;
+	}
+
+	public function addScoreUfo()
+	{
+		score += 50;
+	}
+
+	public function printScore()
+	{
+		scoreText.text = "SCORE: " + score;
+	}
 }

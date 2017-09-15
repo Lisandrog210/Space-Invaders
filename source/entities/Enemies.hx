@@ -16,6 +16,7 @@ class Enemies extends FlxSprite
 	private var OriginalX: Int;
 	public var Bullet1(get, null): BalasEnem;
 	
+	
 	public function new(?X:Int=0, ?Y:Int=0, ?SimpleGraphic:FlxGraphicAsset) 
 	{
 		super(X, Y, SimpleGraphic);
@@ -59,6 +60,7 @@ class Enemies extends FlxSprite
 	{
 		return Bullet1;
 	}
+	
 	
 	
 	
