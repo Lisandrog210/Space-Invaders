@@ -63,7 +63,8 @@ class Player extends FlxSprite
 		if (FlxG.keys.justPressed.SPACE && bullet.alive==false)
 		{
 			bullet.reset(x - 1 + width / 2, y + height / 2 - 4);
-			bullet.velocity.y = (PlayerBullets.shotVel)*-1;
+			bullet.velocity.y = (PlayerBullets.shotVel) *-1;
+			FlxG.sound.play(AssetPaths.);
 		}
 	}
 

@@ -20,14 +20,11 @@ class VictoryMenu extends FlxState
 		add(Title);
 
 		//newScore();
+		
 	}
 	function newScore()
 	{
-		var input = Sys.stdin().readLine();
-
-		Sys.println("Ingrese nombre...");
-		Sys.println("Hola " + input);
-
+		
 	}
 
 }
