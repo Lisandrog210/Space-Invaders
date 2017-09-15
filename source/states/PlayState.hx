@@ -35,26 +35,26 @@ class PlayState extends FlxState
 	{
 		super.create();
 		FlxG.camera.bgColor = FlxColor.BLACK;
-
+		
 		player1 = new Player (10, 135, AssetPaths.canon__png,3);
 		add(player1);
-
+		
 		ufo1 = new Ufo (140, 0, AssetPaths.nave_extra__png);
 		FlxG.state.add(ufo1);
 		ufo1.kill();
-
+		
 		GrupoEne = new FlxTypedGroup<Enemies>();
 		GrupoShields = new FlxTypedGroup<Shields>();
 		scoreText = new FlxText(80, 2, 0, "SCORE", 8);
 		add(scoreText);
-
+		
 		for (j in 0...4)
 		{
 			var shield:Shields = new Shields(j*35+18, 120, AssetPaths.Shield1__png,3);
 			GrupoShields.add(shield);
 		}
 		add(GrupoShields);
-
+		
 		for (i in 0...10)
 		{
 			if (FilaEntera < 6)
@@ -81,7 +81,6 @@ class PlayState extends FlxState
 				GrupoEne.add(enem);
 				FilaEntera+1;
 			}
-
 		}
 		add(GrupoEne);
 
@@ -145,7 +144,7 @@ class PlayState extends FlxState
 					FlxG.sound.play(AssetPaths.explo1__wav);
 					GrupoEne.members[i].Bullet1.kill();
 					player1.checkRevive();
-
+					
 					if (player1.Lives == 0)
 					{
 						resultado = false;
@@ -245,7 +244,7 @@ class PlayState extends FlxState
 		{
 			var Random = new FlxRandom();
 			RandomUfo = Random.int(0, 300);
-
+			
 			if (RandomUfo==5)
 			{
 				ufo1.reset(140,8);

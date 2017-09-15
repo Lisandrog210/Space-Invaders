@@ -15,6 +15,7 @@ class Menu extends FlxState
 	private var PlayButton:FlxButton;
 	private var Title: FlxText;
 	private var Text: FlxText;
+	private var Text2: FlxText;
 
 	override public function create():Void
 	{
@@ -26,6 +27,10 @@ class Menu extends FlxState
 		
 		Text = new FlxText(15, 50, FlxG.width, "Press 'Space' to continue");
 		add(Text);
+		
+		Text2 = new FlxText(5, 90, FlxG.width, "Created by: Lisandro Guevara, Nicolas Piccito, Garcia Agustin");
+		Text2.setFormat(null, 8);
+		add(Text2);
 	}
 	
 	override public function update(elapsed:Float):Void 
