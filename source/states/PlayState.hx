@@ -45,7 +45,7 @@ class PlayState extends FlxState
 		
 		GrupoEne = new FlxTypedGroup<Enemies>();
 		GrupoShields = new FlxTypedGroup<Shields>();
-		scoreText = new FlxText(80, 2, 0, "SCORE", 8);
+		scoreText = new FlxText(100, 1, 0, "SCORE",8);
 		add(scoreText);
 		
 		for (j in 0...4)
@@ -104,6 +104,8 @@ class PlayState extends FlxState
 		collisionPlayerBulletShield();
 		collisionPlayerBulletEnemyBullet();
 		printScore();
+		checkBoundariesEnem();
+		
 
 	}
 
@@ -293,5 +295,16 @@ class PlayState extends FlxState
 	public function printScore()
 	{
 		scoreText.text = "SCORE: " + score;
+	}
+	
+	public function checkBoundariesEnem() 
+	{
+		for (i in 0...GrupoEne.length)
+		{
+		if (GrupoEne.members[i].y+10>FlxG.height) 
+		{
+			FlxG.switchState(new DefeatMenu());
+		}
+		}
 	}
 }

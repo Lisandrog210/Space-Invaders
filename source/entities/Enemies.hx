@@ -1,14 +1,11 @@
 package entities;
+ 
 
 import flixel.FlxG;
 import flixel.FlxSprite;
+import flixel.FlxState;
 import flixel.system.FlxAssets.FlxGraphicAsset;
-
-/**
- * ...
- * @author ...
- */
-
+import flixel.FlxState;
 
 
 class Enemies extends FlxSprite 
@@ -33,7 +30,10 @@ class Enemies extends FlxSprite
 		super.update(elapsed);
 		
 		move();
+		
 	}
+	
+	
 	
 	public function move()
 	{
