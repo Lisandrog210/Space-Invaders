@@ -26,6 +26,7 @@ class DefeatMenu extends FlxState
 		
 		Text2 = new FlxText(15, 70, FlxG.width, "press 'R' to restart");
 		add(Text2);
+		FlxG.sound.play(AssetPaths.gameover__wav);
 	}
 	override public function update(elapsed:Float):Void 
 	{

@@ -141,7 +141,6 @@ class PlayState extends FlxState
 				if (FlxG.overlap(GrupoEne.members[i].Bullet1,player1))
 				{
 					player1.kill();
-					FlxG.sound.play(AssetPaths.explo1__wav);
 					GrupoEne.members[i].Bullet1.kill();
 					player1.checkRevive();
 					
@@ -183,6 +182,8 @@ class PlayState extends FlxState
 				{
 					GrupoShields.members[j].shieldChange();
 					GrupoEne.remove(GrupoEne.members[i], true);
+					
+
 				}
 			}
 		}

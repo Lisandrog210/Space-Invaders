@@ -20,6 +20,9 @@ class VictoryMenu extends FlxState
 		Title = new FlxText(50, 20, FlxG.width, "Victory");
 		Title.setFormat(null, 12, FlxColor.YELLOW);
 		add(Title);
+		FlxG.sound.play(AssetPaths.victoyryguitar__wav);
+
+		//newScore();
 		
 		Text = new FlxText(15, 50, FlxG.width, "Press 'Space' to menu");
 		add(Text);

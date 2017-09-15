@@ -10,7 +10,7 @@ class Player extends FlxSprite
 	public var bullet(get, null):PlayerBullets;
 	public var Lives:Int;
 	private var Totalhealth:FlxTypedGroup<FlxSprite>;
-	
+
 	public function new(?x:Float=80, ?y:Float=140, ?SimpleGraphic:FlxGraphicAsset, ?Lives:Int)
 	{
 		super(x, y, SimpleGraphic);
@@ -20,13 +20,13 @@ class Player extends FlxSprite
 		FlxG.state.add(bullet);
 		bullet.kill();
 		Totalhealth = new FlxTypedGroup<FlxSprite>();
-		
-		for (i in 0...Lives) 
+
+		for (i in 0...Lives)
 		{
 			var heart:FlxSprite = new FlxSprite(i*10, 2, AssetPaths.Life1__png);
 			Totalhealth.add(heart);
 		}
-		
+
 		FlxG.state.add(Totalhealth);
 	}
 
@@ -38,13 +38,15 @@ class Player extends FlxSprite
 		shoot();
 		checkBoundaries();
 		
+
 	}
-	
-	public function checkRevive() 
+
+	public function checkRevive()
 	{
 		Lives--;
-		if (!alive && Lives != 0) 
+		if (!alive && Lives != 0)
 		{
+			FlxG.sound.play(AssetPaths.explo1__wav);
 			reset(70, 135);
 			Totalhealth.members[Lives].destroy();
 		}
@@ -64,6 +66,7 @@ class Player extends FlxSprite
 		{
 			bullet.reset(x - 1 + width / 2, y + height / 2 - 4);
 			bullet.velocity.y = (PlayerBullets.shotVel) *-1;
+
 			FlxG.sound.play(AssetPaths.laser1__wav);
 		}
 	}
@@ -75,12 +78,16 @@ class Player extends FlxSprite
 		if (FlxG.keys.pressed.LEFT)
 			x -= 2 * 60 * FlxG.elapsed;
 	}
-	
-	function get_bullet():PlayerBullets 
+
+	function get_bullet():PlayerBullets
 	{
 		return bullet;
 	}
+
 	
+			
+
+		
 	
 
 }
