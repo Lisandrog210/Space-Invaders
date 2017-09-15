@@ -64,7 +64,7 @@ class Player extends FlxSprite
 		{
 			bullet.reset(x - 1 + width / 2, y + height / 2 - 4);
 			bullet.velocity.y = (PlayerBullets.shotVel) *-1;
-			FlxG.sound.play(AssetPaths.);
+			FlxG.sound.play(AssetPaths.laser1__wav);
 		}
 	}
 
