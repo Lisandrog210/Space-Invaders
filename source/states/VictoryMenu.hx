@@ -16,7 +16,7 @@ class VictoryMenu extends FlxState
 	override public function create():Void
 	{
 		Title = new FlxText(50, 54, FlxG.width, "Victory");
-		Title.setFormat(null, 12, FlxColor.RED);
+		Title.setFormat(null, 12, FlxColor.YELLOW);
 		add(Title);
 
 		//newScore();

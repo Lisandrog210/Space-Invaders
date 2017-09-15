@@ -45,7 +45,7 @@ class PlayState extends FlxState
 
 		GrupoEne = new FlxTypedGroup<Enemies>();
 		GrupoShields = new FlxTypedGroup<Shields>();
-		scoreText = new FlxText(60, 2, 0, "SCORE", 12);
+		scoreText = new FlxText(80, 2, 0, "SCORE", 8);
 		add(scoreText);
 
 		for (j in 0...4)
