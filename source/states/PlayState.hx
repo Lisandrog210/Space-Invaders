@@ -1,6 +1,5 @@
 package states;
 
-import entities.Score;
 import entities.Shields;
 import entities.BalasEnem;
 import flash.display.Sprite;
@@ -18,12 +17,10 @@ import flixel.system.FlxAssets.FlxGraphicAsset;
 
 class PlayState extends FlxState
 {
-	private var enemigo:Enemies;
 	private var GrupoEne:FlxTypedGroup<Enemies>;
 	private var player1:Player;
 	private var orientacion:Bool;
 	private var FilaEntera:Int = 0;
-	private var GrupoDspEne:FlxTypedGroup<BalasEnem>;
 	private var Randm: Int;
 	private var RandomUfo:Int;
 	private var Timer: Float = 0;
@@ -105,23 +102,7 @@ class PlayState extends FlxState
 		collisionEnemiesShield();
 		collisionPlayerBulletShield();
 		collisionPlayerBulletEnemyBullet();
-		removeLife();
-	}
-
-	public function removeLife()
-	{
-		/*if (player1.Lives==2)
-		{
-			life1.
-		}
-		else if (player1.Lives==1)
-		{
-			life2.destroy();
-		}
-		else if (player1.Lives==0)
-		{
-			life3.destroy();
-		}*/
+		
 	}
 
 	function collision():Void

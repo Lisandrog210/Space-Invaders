@@ -13,8 +13,8 @@ import flixel.util.FlxColor;
 class Menu extends FlxState 
 {
 	private var PlayButton:FlxButton;
-	private var ScoreButton:FlxButton;
 	private var Title: FlxText;
+	private var Text: FlxText;
 
 	override public function create():Void
 	{
@@ -24,16 +24,18 @@ class Menu extends FlxState
 		Title.setFormat(null, 12, FlxColor.RED);
 		add(Title);
 		
-		PlayButton = new FlxButton(38, 40, "Play", ClickPlay);
-		add(PlayButton);
-		
-		ScoreButton = new FlxButton(38, 80, " HighScore", clickScore);
-		add(ScoreButton);
+		Text = new FlxText(15, 50, FlxG.width, "Press 'Space' to continue");
+		add(Text);
 	}
 	
-	function clickScore() 
+	override public function update(elapsed:Float):Void 
 	{
-		FlxG.switchState(new HighScore());
+		super.update(elapsed);
+		
+		if (FlxG.keys.pressed.SPACE) 
+		{
+			ClickPlay();
+		}
 	}
 	
 	function ClickPlay():Void
